@@ -89,7 +89,7 @@ class Push:
                 size_length // 2
             ],
             "md5": md5_filename,
-            "input_type": "costume",
+            "type": "costume",
             "name": self.name,
             "tags": ['custom']
         }
@@ -117,7 +117,7 @@ class Push:
         im.thumbnail((100, 100))
         im.save(PATH_THUMB + md5_filename)
 
-        back_obj = {"name": self.name, "md5": md5_filename, "input_type": "backdrop", "tags": ['custom'], "info": []}
+        back_obj = {"name": self.name, "md5": md5_filename, "type": "backdrop", "tags": ['custom'], "info": []}
         print(back_obj)
         with open(LIB_BACKDROP, 'r', encoding="utf-8") as f:
             text = f.read()
@@ -145,7 +145,7 @@ class Push:
             duration = frames / float(rate)
         duration = round(duration, 3)
         shutil.copy(self.fullpath, PATH_ASSET + md5_filename)
-        sound_obj = {"name": self.name, "md5": md5_filename, "input_type": "sound", "tags": ["custom"], "info": [duration]}
+        sound_obj = {"name": self.name, "md5": md5_filename, "type": "sound", "tags": ["custom"], "info": [duration]}
         print(sound_obj)
         with open(LIB_SOUND, 'r', encoding="utf-8") as f:
             text = f.read()
@@ -181,7 +181,7 @@ class Push:
                 im.save(PATH_THUMB + md5 + ext)
             elif ext == ".json":
                 shutil.copy("tmp\\" + filename, PATH_ASSET + md5 + ext)
-                sprite_obj = {"name": self.name, "md5": md5 + ".json", "input_type": "sprite", "tags": ["custom"],
+                sprite_obj = {"name": self.name, "md5": md5 + ".json", "type": "sprite", "tags": ["custom"],
                               "info": [0, 1, 1]}
                 print(sprite_obj)
                 with open(LIB_SPRITE, 'r', encoding="utf-8") as f:
