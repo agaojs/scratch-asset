@@ -1,0 +1,2 @@
+python medialib.py
+pause
