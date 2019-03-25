@@ -77,11 +77,15 @@ class Push:
         md5 = get_md5(self.fullpath)
         md5_filename = md5 + self.suffix
         shutil.copy(self.fullpath, PATH_ASSET + md5_filename)
-
-        im = Image.open(self.fullpath)
-        size_width, size_length = im.size
-        im.thumbnail((100, 100))
-        im.save(PATH_THUMB + md5_filename)
+        if self.suffix == ".png":
+	          # 生成缩略图
+		        im = Image.open(self.fullpath)
+		        size_width, size_length = im.size
+		        im.thumbnail((100, 100))
+		        im.save(PATH_THUMB + md5_filename)
+        else:
+		        size_width, size_length = 100,100
+		        
         custume_obj = {
             "info": [
                 # 计算旋转中心
@@ -175,10 +179,11 @@ class Push:
                 shutil.copy("tmp\\" + filename, PATH_ASSET + md5 + ext)
             elif ext == ".png" or ext == ".svg" or ext == ".jpg":
                 shutil.copy("tmp\\" + filename, PATH_ASSET + md5 + ext)
-                # 生成缩略图
-                im = Image.open("tmp\\" + filename)
-                im.thumbnail((100, 100))
-                im.save(PATH_THUMB + md5 + ext)
+                if ext == ".png" or ext == ".jpg":
+	                  # 生成缩略图
+	                  im = Image.open("tmp\\" + filename)
+	                  im.thumbnail((100, 100))
+	                  im.save(PATH_THUMB + md5 + ext)
             elif ext == ".json":
                 shutil.copy("tmp\\" + filename, PATH_ASSET + md5 + ext)
                 sprite_obj = {"name": self.name, "md5": md5 + ".json", "type": "sprite", "tags": ["custom"],
